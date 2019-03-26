@@ -77,6 +77,7 @@ public class ShadowImageView extends RelativeLayout {
             if (a.hasValue(R.styleable.ShadowImageView_shadowColor)) {
                 shadowColor = a.getColor(R.styleable.ShadowImageView_shadowColor, Color.parseColor("#8D8D8D"));
             }
+            a.recycle();
         } else {
             float density = context.getResources().getDisplayMetrics().density;
             shadowRound = (int) (shadowRound * density);
@@ -205,7 +206,7 @@ public class ShadowImageView extends RelativeLayout {
                 shadowPaint.setShadowLayer(radius, 0, shadowDimen, this.shadowColor);
             }
 
-            RectF rectF = new RectF(view.getX() + (view.getWidth() / 20), view.getY(), view.getX() + view.getWidth() - (view.getWidth() / 20), view.getY() + view.getHeight() - ((view.getHeight() / 40)));
+            RectF rectF = new RectF(view.getX() + (view.getWidth() / 20.f), view.getY(), view.getX() + view.getWidth() - (view.getWidth() / 20.f), view.getY() + view.getHeight() - ((view.getHeight() / 40.f)));
 
             canvas.drawRoundRect(rectF, shadowRound, shadowRound, shadowPaint);
 
@@ -220,7 +221,6 @@ public class ShadowImageView extends RelativeLayout {
         Color.colorToHSV(color, hsv);
         hsv[1] = hsv[1] + 0.1f;
         hsv[2] = hsv[2] - 0.1f;
-        int darkerColor = Color.HSVToColor(hsv);
-        return darkerColor;
+        return Color.HSVToColor(hsv);
     }
 }
